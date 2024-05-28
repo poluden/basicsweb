@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Splitter</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Розділення рядка на пари символів</h2>
+        <div class="form-group">
+            <label for="inputString">Введіть рядок:</label>
+            <input type="text" class="form-control" id="inputString">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="splitString()">Розділити</button>
+        <ul id="resultList"></ul>
+    </div>
+
+    <script>
+        function splitString() {
+            const inputString = document.getElementById('inputString').value;
+            const resultList = document.getElementById('resultList');
+            resultList.innerHTML = '';
+
+            const resultArray = [];
+            for (let i = 0; i < inputString.length; i += 2) {
+                let pair = inputString[i];
+                if (i + 1 < inputString.length) {
+                    pair += inputString[i + 1];
+                } else {
+                    pair += '_';
+                }
+                resultArray.push(pair);
+            }
+
+            resultArray.forEach(pair => {
+                const listItem = document.createElement('li');
+                listItem.textContent = pair;
+                resultList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>

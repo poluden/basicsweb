@@ -1,0 +1,19 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  max-width: 300px;
+  margin: auto;
+}
+.day, .header {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+.header {
+  font-weight: bold;
+  background-color: #f4f4f4;
+}
+.weekend {
+  background-color: #ffdddd;
+}

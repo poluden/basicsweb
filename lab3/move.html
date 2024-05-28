@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Rectangle</title>
+    <style>
+        #rectangle {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="rectangle"></div>
+
+    <script>
+        const rectangle = document.getElementById('rectangle');
+        let directionX = 1;
+        let directionY = 1;
+
+        function moveRectangle() {
+            const rect = rectangle.getBoundingClientRect();
+            const containerWidth = window.innerWidth;
+            const containerHeight = window.innerHeight;
+
+            if (rect.right >= containerWidth || rect.left <= 0) {
+                directionX *= -1;
+            }
+            if (rect.bottom >= containerHeight || rect.top <= 0) {
+                directionY *= -1;
+            }
+
+            rectangle.style.left = rect.left + directionX + 'px';
+            rectangle.style.top = rect.top + directionY + 'px';
+        }
+
+        let interval = setInterval(moveRectangle, 10);
+
+        rectangle.addEventListener('mouseover', () => {
+            clearInterval(interval);
+        });
+
+        rectangle.addEventListener('mouseout', () => {
+            interval = setInterval(moveRectangle, 10);
+        });
+    </script>
+</body>
+</html>

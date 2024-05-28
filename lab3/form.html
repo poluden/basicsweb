@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Форма введення</h2>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="firstName">Ім’я:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName">
+                <div class="error" id="firstNameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Прізвище:</label>
+                <input type="text" class="form-control" id="lastName" name="lastName">
+                <div class="error" id="lastNameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="address">Адреса:</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="city">Місто:</label>
+                <input type="text" class="form-control" id="city" name="city">
+            </div>
+            <div class="form-group">
+                <label for="country">Країна:</label>
+                <input type="text" class="form-control" id="country" name="country">
+            </div>
+            <div class="form-group">
+                <label for="zip">Поштовий індекс:</label>
+                <input type="text" class="form-control" id="zip" name="zip">
+                <div class="error" id="zipError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="text" class="form-control" id="email" name="email">
+                <div class="error" id="emailError"></div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="validateForm()">Підтвердити</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const zip = document.getElementById('zip').value;
+            const email = document.getElementById('email').value;
+
+            const namePattern = /^[A-Za-zА-Яа-я]+$/;
+            const zipPattern = /^\d{5}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            document.getElementById('firstNameError').innerText = '';
+            document.getElementById('lastNameError').innerText = '';
+            document.getElementById('zipError').innerText = '';
+            document.getElementById('emailError').innerText = '';
+
+            if (!namePattern.test(firstName)) {
+                document.getElementById('firstNameError').innerText = 'Ім’я повинно містити лише літери';
+                isValid = false;
+            }
+
+            if (!namePattern.test(lastName)) {
+                document.getElementById('lastNameError').innerText = 'Прізвище повинно містити лише літери';
+                isValid = false;
+            }
+
+            if (!zipPattern.test(zip)) {
+                document.getElementById('zipError').innerText = 'Поштовий індекс повинен складатися з 5 цифр';
+                isValid = false;
+            }
+
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').innerText = 'Неправильний формат e-mail';
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Форма успішно відправлена');
+            }
+        }
+    </script>
+</body>
+</html>
